@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>President Ramon Magsaysay State University</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      line-height: 1.6;
+      color: #333;
+      background-color: #fff;
+    }
+
+    /* Header */
+    .header {
+      background-color: #1B4F72; /* PRMSU dark blue */
+      color: white;
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .prmsu-logo {
+      width: 70px;
+      height: auto;
+      margin-right: 15px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .logo-container:hover .prmsu-logo {
+      transform: scale(1.05);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+    }
+
+    .university-name {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .university-name-main {
+      font-size: 20px;
+      font-weight: 700;
+      color: white;
+      letter-spacing: 1px;
+      line-height: 1.2;
+    }
+
+    .university-name-sub {
+      font-size: 16px;
+      font-weight: 400;
+      color: #F4D03F; /* Gold accent */
+      letter-spacing: 0.5px;
+    }
+
+    .nav-menu {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+    }
+
+    .nav-menu a {
+      color: white;
+      text-decoration: none;
+      transition: opacity 0.3s ease;
+      font-size: 0.95rem;
+      font-weight: 500;
+    }
+
+    .nav-menu a:hover {
+      opacity: 0.8;
+    }
+
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+    }
+
+    .hamburger span {
+      width: 25px;
+      height: 3px;
+      background: white;
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+
+    .hamburger.active span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px);
+    }
+
+    @media (max-width: 768px) {
+      .nav-menu {
+        flex-direction: column;
+        position: absolute;
+        top: 80px;
+        right: 0;
+        background: #1B4F72;
+        width: 100%;
+        overflow: hidden;
+        max-height: 0;
+        padding: 0;
+        gap: 1.5rem;
+        align-items: center;
+        box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+        transition: max-height 0.4s ease-in-out;
+      }
+
+      .nav-menu.mobile-active {
+        max-height: 400px;
+        padding: 1rem 0;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+    }
+
+    /* Hero */
+    .hero {
+      background: linear-gradient(rgba(128,128,128,0.6), rgba(128,128,128,0.6)), 
+              url("Untitled.png") no-repeat center center/cover;
+      color: white;
+      padding: 8rem 2rem 6rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      letter-spacing: -1px;
+    }
+
+    .hero p {
+      font-size: 1.3rem;
+      opacity: 0.9;
+      max-width: 650px;
+      margin: 0 auto;
+    }
+
+    /* Sections */
+    .main-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      color: #1B4F72;
+      margin-bottom: 2rem;
+      text-align: center;
+      font-weight: 700;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2.5rem;
+      margin-bottom: 4rem;
+    }
+
+    .card {
+      background: white;
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border-left: 4px solid #1B4F72;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+    }
+
+    .card h3 {
+      color: #1B4F72;
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+
+    .card p {
+      color: #555;
+      line-height: 1.7;
+    }
+
+    /* CTA */
+    .cta-section {
+      background: #f8f9fa;
+      padding: 4rem 2rem;
+      text-align: center;
+      margin-top: 3rem;
+    }
+
+    .cta-section h2 {
+      color: #1B4F72;
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      font-weight: 700;
+    }
+
+    .cta-section p {
+      font-size: 1.2rem;
+      color: #666;
+      max-width: 600px;
+      margin: 0 auto 2rem;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 1rem 2rem;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+      font-weight: 500;
+    }
+
+    .btn-primary {
+      background: #1B4F72;
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: #154360;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(27, 79, 114, 0.3);
+    }
+
+    .btn-secondary {
+      background: white;
+      color: #1B4F72;
+      border: 2px solid #1B4F72;
+    }
+
+    .btn-secondary:hover {
+      background: #1B4F72;
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    /* Footer */
+    .footer {
+      background: #2c3e50;
+      color: white;
+      padding: 3rem 2rem 2rem;
+      margin-top: 4rem;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+
+    .footer h4 {
+      margin-bottom: 1rem;
+      color: #ecf0f1;
+    }
+
+    .footer ul {
+      list-style: none;
+    }
+
+    .footer ul li {
+      margin-bottom: 0.5rem;
+    }
+
+    .footer a {
+      color: #bdc3c7;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .footer a:hover {
+      color: #ecf0f1;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 2rem;
+      margin-top: 2rem;
+      border-top: 1px solid #34495e;
+      color: #95a5a6;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="nav-container">
+      <a href="#" class="logo-container">
+        <img src="PRMSU_LOGO.png" alt="PRMSU Logo" class="prmsu-logo">
+        <div class="university-name">
+          <span class="university-name-main">President Ramon Magsaysay State University</span>
+          <span class="university-name-sub">Since 1910</span>
+        </div>
+      </a>
+      <nav>
+        <ul class="nav-menu">
+          <li><a href="#academics">Academics</a></li>
+          <li><a href="#research">Research</a></li>
+          <li><a href="#news">News</a></li>
+          <li><a href="#campus-life">Campus Life</a></li>
+          <li><a href="#about">About</a></li>
+        </ul>
+      </nav>
+      <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <h1>Excellence in Service</h1>
+    <p>PRMSU is committed to delivering quality education, advancing research, and fostering community engagement since 1910.</p>
+  </section>
+
+  <!-- Academics -->
+  <main class="main-content">
+    <h2 class="section-title" id="academics">Academics</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Undergraduate Programs</h3>
+        <p>Comprehensive programs that prepare students for leadership and service in diverse fields.</p>
+      </div>
+      <div class="card">
+        <h3>Graduate Studies</h3>
+        <p>Advanced academic training designed to shape future leaders and innovators.</p>
+      </div>
+      <div class="card">
+        <h3>Specialized Courses</h3>
+        <p>Targeted programs focused on industry-relevant skills and applied knowledge.</p>
+      </div>
+    </div>
+
+    <!-- Research -->
+    <h2 class="section-title" id="research">Research</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Science & Technology</h3>
+        <p>Pioneering research in science and technology that addresses real-world challenges.</p>
+      </div>
+      <div class="card">
+        <h3>Agriculture & Fisheries</h3>
+        <p>Innovative studies supporting sustainable farming, fisheries, and food systems.</p>
+      </div>
+      <div class="card">
+        <h3>Community Development</h3>
+        <p>Collaborative projects aimed at uplifting communities and promoting inclusive growth.</p>
+      </div>
+    </div>
+
+    <!-- News -->
+    <h2 class="section-title" id="news">News & Updates</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Campus Highlights</h3>
+        <p>Stay informed with the latest PRMSU events, achievements, and announcements.</p>
+      </div>
+      <div class="card">
+        <h3>Research Breakthroughs</h3>
+        <p>Discover the latest findings from PRMSU’s scholars and research teams.</p>
+      </div>
+      <div class="card">
+        <h3>Student Success Stories</h3>
+        <p>Celebrating the accomplishments of our students across various disciplines.</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- Call to Action -->
+  <section class="cta-section">
+    <h2>Join PRMSU</h2>
+    <p>Explore the countless opportunities, programs, and resources at PRMSU.</p>
+    <div class="cta-buttons">
+      <a href="#" class="btn btn-primary">Apply Now</a>
+      <a href="#" class="btn btn-secondary">Visit Campus</a>
+      <a href="#" class="btn btn-secondary">Request Information</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div>
+        <h4>Academics</h4>
+        <ul>
+          <li><a href="#">Undergraduate</a></li>
+          <li><a href="#">Graduate</a></li>
+          <li><a href="#">Online Learning</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Research</h4>
+        <ul>
+          <li><a href="#">Research Areas</a></li>
+          <li><a href="#">Publications</a></li>
+          <li><a href="#">Extension Programs</a></li>
+          <li><a href="#">Innovation</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Campus Life</h4>
+        <ul>
+          <li><a href="#">Student Orgs</a></li>
+          <li><a href="#">Sports & Athletics</a></li>
+          <li><a href="#">Arts & Culture</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>About PRMSU</h4>
+        <ul>
+          <li><a href="#">History</a></li>
+          <li><a href="#">Leadership</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2024 President Ramon Magsaysay State University. All rights reserved. | Zambales, Philippines</p>
+    </div>
+  </footer>
+
+  <!-- Script for Hamburger -->
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const navMenu = document.querySelector('.nav-menu');
+
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      navMenu.classList.toggle('mobile-active');
+    });
+
+    // Auto-close menu on link click (for mobile)
+    document.querySelectorAll('.nav-menu a').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        navMenu.classList.remove('mobile-active');
+      });
+    });
+  </script>
+</body>
+</html>
